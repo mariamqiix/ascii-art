@@ -10,14 +10,23 @@ import (
 func main() {
 	Flag := ascii.Validation()
 	if Flag {
+		newLine := ascii.OnlyContains(os.Args[1], "\\n")
 		WordsInArr := strings.Split(os.Args[1], "\\n")
 		fileName := "standard"
 		if len(os.Args) == 3 { 
 			fileName = strings.ToLower(os.Args[2])
 		}
+		if newLine == true && len(WordsInArr) != 1 {
+			for i := 0 ; i < len(WordsInArr)-1; i++ {
+				fmt.Println()
+			}
+			return
+		}
+		
 		for l := 0; l < len(WordsInArr); l++ {
 			var Words [][]string
 			Text1 := WordsInArr[l]
+			Text1 = strings.ReplaceAll(Text1, "\\t", "   ")
 			if string(Text1) == "" {
 				fmt.Println("")
 			} else {
